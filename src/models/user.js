@@ -93,7 +93,7 @@ userSchema.methods.generateAuthToken = async function () {
   // PART_3: signature used to verify token
   // The goal of the JWT isn't to hide the data, it is publicly viewable to anyone who has token
   // The whole point of JWT is to create data that is verifiable via these signature (JWT_SECRET)
-  const token = jwt.sign({ _id: user._id.toSting() }, process.env.JWT_SECRET);
+  const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET);
 
   user.tokens = user.tokens.concat({ token });
   await user.save();
@@ -103,7 +103,7 @@ userSchema.methods.generateAuthToken = async function () {
 
 userSchema.statics.findByCredentials = async (email, password) => {
   const user = await User.findOne({ email });
-  console.log(user);
+
   if (!user) {
     throw new Error('Unable to login.');
   }
