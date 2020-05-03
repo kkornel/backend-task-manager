@@ -1,7 +1,6 @@
 const { Router } = require('express');
 const multer = require('multer');
 const sharp = require('sharp');
-
 const User = require('../models/user');
 const auth = require('../middleware/auth');
 const { sendWelcomeEmail, sendCancelationEmail } = require('../emails/account');
@@ -17,9 +16,7 @@ router.post('/users', async (req, res) => {
 
   try {
     await user.save();
-    // send email
     sendWelcomeEmail(user.email, user.name);
-    // generate token
     const token = await user.generateAuthToken();
     res.status(201).send({ user, token });
   } catch (error) {
@@ -36,8 +33,7 @@ router.post('/users/login', async (req, res) => {
     const token = await user.generateAuthToken();
     res.send({ user, token });
   } catch (error) {
-    console.log(error);
-    return res.status(400).send(error);
+    return res.status(400).send({ error });
   }
 });
 

@@ -6,14 +6,6 @@ const taskRouter = require('./routers/taskRouter');
 
 const app = express();
 
-const upload = multer({
-  dest: 'images',
-});
-
-app.post('/upload', upload.single('upload'), (req, res) => {
-  res.send();
-});
-
 // Automatically parse incoming JSON to an object
 app.use(express.json());
 app.use(userRouter);
