@@ -3,6 +3,14 @@ const app = require('../src/app');
 const User = require('../src/models/user');
 const { userOneId, userOne, setupDatabase } = require('./fixtures/db');
 
+//
+// User Test Ideas
+//
+// Should not signup user with invalid name/email/password
+// Should not update user if unauthenticated
+// Should not update user with invalid name/email/password
+// Should not delete user if unauthenticated
+
 beforeEach(setupDatabase);
 
 test('should signup a new user', async () => {
